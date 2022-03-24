@@ -1,0 +1,69 @@
+<head>
+	<title>Vannmodellsimulator</title>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+</head>
+<body>
+	<div id="chartContainer">
+		<div class="chart" id="chart1"></div>
+		<div class="chart" id="chart2"></div>
+		<div class="chart" id="chart3"></div>
+		<div class="chart" id="chart4"></div>
+	</div>
+	<div id="controls">
+		<h2>Hover input boxes for information</h2>
+		<span>P: </span><input id="P" type="number" title="Proportional value"></input><br>
+		<span>I: </span><input id="I" type="number" title="Integral value"></input><br>
+		<span>D: </span><input id="D" type="number" title="Derivative value"></input><br>
+		<span>Setpoint: </span><input id="setpoint" type="number" title="Setpoint, 0 - 100"></input><br>
+		<span>Process delay (s): </span><input id="processDelay" type="number" title="How many seconds old the processvalue signal the regulator recieves is"></input><br>
+		<span>Motor acceleration%/s: </span><input id="acceleration" type="number" title="How many % the motor is allowed to accelerate in 1 second. 1 - 100"></input><br>
+		<span>Simulation length: </span><input id="simulationLength" type="number" title="Number of seconds to run the simulation for. Long simulations take a lot of time to autotune."></input><br>
+		<input type="button" value="Render graph" id="renderGraph" title="Render graph with manual parameters"></input><br>
+		<input type="button" value="Run autotune" id="runAutotune" title="Create graph with autotuned parameters"></input><br>
+		<span>Variable setpoint: </span><input id="variableSetpoint" type="checkbox" title="Change the setpoint 2 times"></input><br>
+		<span>Variable drain: </span><input id="variableDrain" type="checkbox" title="Drain varies slightly"></input><br>
+		<span>AT generations: </span><input id="ATgenerations" type="number" title="How many iterations the AT is allowed to attempt. Values above 500 take a long time. Extremely iminishing returns. 3 generations would take 2 hours IRL"></input><br>
+		<span>AT train with PRNG: </span><input id="usePRNG" type="checkbox" title="Allow AT to cheat when using Variable Drain, achieving best result possible"></input><br>
+		<span>AT Stability Factor: </span><input id="ATstabilityFactor" type="number" title="Train more accurately with Variable Drain when PRNG is disabled"></input><br>
+		<span>AT Training Root: </span><input id="ATtrainingRoot" type="number" title="AT score evaluation is Math.pow(setpoint - processvalue, 1.8). Changing it makes the AT prioritize differently"></input><br>
+	</div>
+	<div id="attribution">
+		<a href="https://github.com/danielv123"><p>Vannmodellsimulator av Daniel Vestøl</p></a>
+	</div>
+	<style>
+		#attribution {
+			position:fixed;
+			bottom:0px;
+			right:0px;
+			font-size:11px;
+		}
+		#controls, #chartContainer {
+			float:left;
+		}
+		#controls {
+			padding-left: 20px;
+			width: calc(20% - 20px);
+		}
+		#controls * {
+			height: 22px;
+		}
+		#controls > span {
+			display: inline-block;
+			width: 150px;
+		}
+		#controls > input {
+			float:right;
+			margin: 0px;
+		}
+		#controls > input[type="button"]{
+			width:100%;
+		}
+		#chartContainer {
+			width: 80%;
+		}
+	</style>
+	<script src="main.js"></script>
+</body>

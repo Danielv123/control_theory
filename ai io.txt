@@ -1,0 +1,12 @@
+AI PID regulator
+
+Input:
+	setpoint
+	current value
+	error
+	drain
+
+
+Output:
+motor speed (0-1)
+
