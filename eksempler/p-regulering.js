@@ -1,21 +1,21 @@
 
 function drawChart(data){
-	Highcharts.chart('container', {
+	Highcharts.chart("container", {
 		title: {
-			text: 'Water level simulator'
+			text: "Water level simulator"
 		},
 		subtitle: {
-			text: `Cross your fingers it won't overflow`
+			text: "Cross your fingers it won't overflow"
 		},
 		yAxis: {
 			title: {
-				text: 'Percentage'
+				text: "Percentage"
 			}
 		},
 		legend: {
-			layout: 'vertical',
-			align: 'right',
-			verticalAlign: 'middle'
+			layout: "vertical",
+			align: "right",
+			verticalAlign: "middle"
 		},
 		plotOptions: {
 			series: {
@@ -33,9 +33,9 @@ function drawChart(data){
 				},
 				chartOptions: {
 					legend: {
-						layout: 'horizontal',
-						align: 'center',
-						verticalAlign: 'bottom'
+						layout: "horizontal",
+						align: "center",
+						verticalAlign: "bottom"
 					}
 				}
 			}]
@@ -44,7 +44,7 @@ function drawChart(data){
 	});
 }
 class Simulator{
-	constructor({} = {}){
+	constructor(){
 		this.tank = new Tank();
 		this.pump = new Pump({
 			fromTank: this.tank,
@@ -65,11 +65,11 @@ class Simulator{
 		return {
 			tr,
 			pr,
-		}
+		};
 	}
 }
 class Tank {
-	constructor({} = {}){
+	constructor(){
 		this.maxLevel = 1000;
 		this.level = 50;
 		
@@ -77,7 +77,7 @@ class Tank {
 		this.minDrain = 0;
 		this.lastDrain = 1;
 	}
-	update({} = {}){
+	update(){
 		let drain = this.drain;
 		this.level -= drain;
 		this.level = Math.max(Math.min(this.maxLevel, this.level), 0);
@@ -88,11 +88,12 @@ class Tank {
 	}
 	get drain(){
 		let range = this.minDrain - this.maxDrain;
-		range = range/25;
+		range = range / 25;
+		var drain;
 		if(Math.random > 0.5){
-			var drain = this.lastDrain + (Math.random() * range);
+			drain = this.lastDrain + (Math.random() * range);
 		} else {
-			var drain = this.lastDrain - (Math.random() * range);
+			drain = this.lastDrain - (Math.random() * range);
 		}
 		drain = Math.min(this.maxDrain, drain);
 		drain = Math.max(this.minDrain, drain);
@@ -122,7 +123,7 @@ class Pump {
 		return {
 			pumped: this.speed * this.waterPerSpeed,
 			speed: this.speed,
-		}
+		};
 	}
 }
 
@@ -145,5 +146,5 @@ function runSim(){
 		chartData[1].data.push(data.tr.level);
 		chartData[2].data.push(data.pr.speed);
 	}
-	drawChart(chartData)
+	drawChart(chartData);
 }
